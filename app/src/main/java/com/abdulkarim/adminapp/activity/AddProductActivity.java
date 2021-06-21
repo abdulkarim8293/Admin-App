@@ -1,4 +1,4 @@
-package com.abdulkarim.adminapp;
+package com.abdulkarim.adminapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,14 +9,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.abdulkarim.adminapp.DBHelper;
+import com.abdulkarim.adminapp.R;
+import com.abdulkarim.adminapp.modal.Product;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -24,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,10 +49,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
-        product_image = findViewById(R.id.product_image_view);
-        product_name = findViewById(R.id.product_name_edit_text);
-        product_price = findViewById(R.id.product_price_edit_text);
-        save_button = findViewById(R.id.save_button);
+        init();
 
         product_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +77,15 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void init() {
+
+        product_image = findViewById(R.id.product_image_view);
+        product_name = findViewById(R.id.product_name_edit_text);
+        product_price = findViewById(R.id.product_price_edit_text);
+        save_button = findViewById(R.id.save_button);
 
     }
 
@@ -107,7 +118,9 @@ public class AddProductActivity extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             String imageUrl = uri.toString();
                             //Log.i("TAG",""+imageUrl);
-                            saveData(productName,productPrice,imageUrl);
+                            //saveData(productName,productPrice,imageUrl);
+                            Product product = new Product();
+                            insertProduct(product);
                         }
                     });
 
@@ -117,7 +130,23 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
-    private void saveData(String productName, String productPrice, String imageUrl) {
+    private void insertProduct(Product product){
+        DBHelper.insertProduct(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(AddProductActivity.this, "Product upload success", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Toast.makeText(AddProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+/*    public void saveData(String productName, String productPrice, String imageUrl) {
 
         Map<String,Object> productMap = new HashMap<>();
         productMap.put("name",productName);
@@ -134,5 +163,5 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 }
