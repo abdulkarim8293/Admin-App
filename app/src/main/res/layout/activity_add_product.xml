@@ -1,69 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".activity.AddProductActivity">
 
-    <ImageView
-        android:id="@+id/product_image_view"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="64dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.009"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:text="Product Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_image_view" />
+   <ScrollView
+       android:layout_width="match_parent"
+       android:scrollbarSize="1dp"
+       android:layout_height="wrap_content">
+       <LinearLayout
+           android:padding="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/product_name_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Product Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+           <ImageView
+               android:id="@+id/product_image_view"
+               android:layout_width="120dp"
+               android:layout_height="120dp"
+               android:scaleType="fitXY"
+               android:src="@drawable/ic_launcher_background" />
 
-    <EditText
-        android:id="@+id/product_price_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="Product Price"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_name_edit_text" />
+           <TextView
+               android:id="@+id/textView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="8dp"
+               android:padding="5dp"
+               android:text="Product Image" />
 
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_price_edit_text"
-        app:layout_constraintVertical_bias="0.144" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/product_name"
+               android:layout_marginTop="5dp"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:helperTextEnabled="true"
+               app:helperText="Product name"
+               app:counterEnabled="true"
+               app:counterMaxLength="100"
+               app:endIconMode="clear_text"
+               android:hint="Name">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="textCapWords"
+                   android:maxLength="200" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/product_price"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:helperTextEnabled="true"
+               android:layout_marginTop="5dp"
+               app:helperText="Product price"
+               app:endIconMode="clear_text"
+               android:hint="Price">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="numberDecimal"/>
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/ll_product_category"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:helperTextEnabled="true"
+               android:layout_marginTop="5dp"
+               app:endIconMode="dropdown_menu"
+               app:helperText="Select category"
+               android:hint="Category">
+
+               <AutoCompleteTextView
+                   android:id="@+id/product_category"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="none"
+                   />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/product_description"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:helperTextEnabled="true"
+               app:helperText="Product description"
+               app:counterEnabled="true"
+               app:counterMaxLength="400"
+               android:layout_marginTop="5dp"
+               app:endIconMode="clear_text"
+               android:hint="Description">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="textMultiLine"
+                   android:maxLength="400"
+                   android:minLines="4"/>
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+
+           <LinearLayout
+               android:layout_marginTop="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <Button
+                   android:id="@+id/select_purchase_date_button"
+                   android:text="Select purchase date"
+                   android:drawablePadding="5dp"
+                   android:textAllCaps="false"
+                   android:drawableLeft="@drawable/ic_calendar_24"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"/>
+               <TextView
+                   android:id="@+id/purchase_date_text"
+                   android:layout_marginTop="5dp"
+                   android:layout_marginBottom="5dp"
+                   android:background="#ddd"
+                   android:padding="5dp"
+                   android:layout_weight="1"
+                   android:gravity="center_vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   />
+
+           </LinearLayout>
+           <Button
+               android:id="@+id/save_button"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Submit"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="10dp"
+               android:textColor="@color/white"
+               android:background="@drawable/button_background" />
+
+       </LinearLayout>
+   </ScrollView>
+
+</LinearLayout>
