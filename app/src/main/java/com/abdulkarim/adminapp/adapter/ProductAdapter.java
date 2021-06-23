@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abdulkarim.adminapp.R;
+import com.abdulkarim.adminapp.activity.ProductDetailsActivity;
 import com.abdulkarim.adminapp.activity.ProductListActivity;
 import com.abdulkarim.adminapp.modal.Product;
 import com.squareup.picasso.Picasso;
@@ -56,8 +57,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ProductListActivity.class);
-                intent.putExtra("id",product.getId());
+                Intent intent = new Intent(context, ProductDetailsActivity.class);
+                intent.putExtra("product",product);
                 context.startActivity(intent);
             }
         });
