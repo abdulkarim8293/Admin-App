@@ -4,12 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".activity.ProductListActivity">
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#F4F4F4"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/backIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_centerVertical="true"
+            android:text="PRODUCT DETAILS"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_margin="10dp"
         android:layout_height="match_parent"
+        android:layout_below="@+id/top_bar"
         android:id="@+id/product_recycler"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
