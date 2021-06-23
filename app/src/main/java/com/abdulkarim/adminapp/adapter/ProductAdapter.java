@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abdulkarim.adminapp.R;
-import com.abdulkarim.adminapp.activity.ProductActivity;
+import com.abdulkarim.adminapp.activity.ProductListActivity;
 import com.abdulkarim.adminapp.modal.Product;
 import com.squareup.picasso.Picasso;
 import java.util.List;
@@ -22,9 +22,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     private Context context;
     private List<Product> productList;
-
-    // favorite filed
-    private boolean isFavorite = false;
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -59,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ProductActivity.class);
+                Intent intent = new Intent(context, ProductListActivity.class);
                 intent.putExtra("id",product.getId());
                 context.startActivity(intent);
             }
@@ -79,9 +76,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         private ImageView product_image;
         private LinearLayout linearLayout;
         private TextView old_price;
-
-
-
 
 
         public MyViewHolder(@NonNull View itemView) {

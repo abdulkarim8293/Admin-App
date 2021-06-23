@@ -24,13 +24,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductListActivity extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButton;
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private List<Product> productList = new ArrayList<>();
     private FirebaseFirestore firebaseFirestore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,6 @@ public class ProductActivity extends AppCompatActivity {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         getAllProduct();
-
-
 
         floatingActionButton = findViewById(R.id.add_product);
         recyclerView = findViewById(R.id.product_recycler);
@@ -53,12 +52,15 @@ public class ProductActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProductActivity.this, AddProductActivity.class));
+                startActivity(new Intent(ProductListActivity.this, AddProductActivity.class));
             }
         });
+
+
     }
 
     private void getAllProduct() {
+
         firebaseFirestore.collection(Collection.product).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -74,6 +76,7 @@ public class ProductActivity extends AppCompatActivity {
 
                     productAdapter.notifyDataSetChanged();
                 }
+                Log.i("TAG","product activity product list :"+productList.size());
             }
         });
     }
