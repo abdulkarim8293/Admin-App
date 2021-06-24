@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdminApp">
-        <activity android:name=".activity.OrderActivity"></activity>
+        <activity android:name=".activity.OrderDetailsActivity"></activity>
+        <activity android:name=".activity.OrderActivity" />
         <activity android:name=".activity.ProductDetailsActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
